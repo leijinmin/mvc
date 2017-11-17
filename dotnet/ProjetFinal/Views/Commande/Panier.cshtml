@@ -1,0 +1,51 @@
+﻿@model ProjetFinal.Models.Panier
+@{ 
+    Session["Link"] = "/Commande/Panier";
+}
+@if (Model != null)
+{
+<form id="CommanderForm" action="/Commande/Commander">
+    @Html.AntiForgeryToken()
+</form>
+<form id="EnleverForm" action="/Commande/Enlever">
+        @Html.AntiForgeryToken()
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(m => m.DateCreated) : 
+                </dt>
+                <dd>@Html.DisplayFor(m => m.DateCreated)</dd>
+            </dl>
+            <table class="table">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Longeur</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+                
+                    @foreach (var item in Model.Produits)
+                    {
+                    <tr>
+                        <td>@Html.ActionLink(item.Nom, "Details", "Home", new { id = item.ProduitId }, new { name = "produitDetail" })</td>
+                        <td>@Html.DisplayFor(m => item.Prix)</td>
+                        <td>@Html.DisplayFor(m => item.Longeur)</td>
+                        <td>@Html.Raw(HttpUtility.HtmlDecode(item.Description))</td>
+                        <td><input type="checkbox" name="cour_@item.ProduitId" value="@item.ProduitId"></td>
+                    </tr>
+                    }
+                
+            </table>
+        </div>
+        <p>
+            <button id="Commander" class="btn btn-default">Commander</button>
+            <button id="Enlever" class="btn btn-default">Enlever</button>
+            <a href="/Home/Produits" class="btn btn-default">Choisir d'autres produits</a>
+        </p>
+</form>
+}
+else
+{
+<h3>Le panier est vide ! </h3>
+}

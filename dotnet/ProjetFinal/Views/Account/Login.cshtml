@@ -1,0 +1,36 @@
+﻿@model ProjetFinal.ViewModels.LoginClient
+
+
+<form id="LoginForm" action="/Account/DoLogin">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Connexion</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Courriel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Courriel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Courriel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MotPasse, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MotPasse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MotPasse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button id="Login" class="btn btn-default">Connexion</button>  &nbsp;&nbsp;
+                @Html.CheckBoxFor(model => model.IsPersistent, htmlAttributes: new { @checked = true }) Sauvegarder le statut de connexion
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

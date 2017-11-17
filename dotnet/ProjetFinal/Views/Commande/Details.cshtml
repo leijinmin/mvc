@@ -1,0 +1,33 @@
+﻿@model ProjetFinal.ViewModels.PanierCommande
+    <div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(m => m.DateCreated) :
+            </dt>
+            <dd> @Html.DisplayFor(m=>m.DateCreated)</dd>
+            <dt>
+                @Html.DisplayNameFor(m => m.DateFinie) : 
+            </dt>
+            <dd>@Html.DisplayFor(m => m.DateFinie)</dd>
+        </dl>
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Longeur</th>
+                <th>Description</th>
+            </tr>
+            @foreach (var item in Model.Produits)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.Nom, "Details", "Home", new { id = item.ProduitId }, new { name = "produitDetail" })</td>
+                    <td>@Html.DisplayFor(m => item.Prix)</td>
+                    <td>@Html.DisplayFor(m => item.Longeur)</td>
+                    <td>@Html.Raw(HttpUtility.HtmlDecode(item.Description))</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
